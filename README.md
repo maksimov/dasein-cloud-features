@@ -1,4 +1,3 @@
-# dasein-cloud-features
 Dasein Cloud Feature Matrix
 ===========================
 
@@ -47,7 +46,6 @@ which looks like this (actual sample taken in Jan, 2015):
 |   relationalDatabase      |X        |         |X        |         |         |         |         |
 |---------------------------|---------|---------|---------|---------|---------|---------|---------|
 |storage                    |X        |         |X        |X        |X        |         |         |
-|   blobStore               |X        |         |X        |         |X        |         |         |
 |   offlineStorage          |X        |         |         |         |         |         |         |
 |   onlineStorage           |X        |         |X        |         |X        |         |         |
 ```

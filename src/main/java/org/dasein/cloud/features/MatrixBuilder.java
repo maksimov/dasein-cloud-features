@@ -21,6 +21,8 @@ package org.dasein.cloud.features;
 import org.dasein.cloud.CloudProvider;
 import org.reflections.Reflections;
 
+import javax.annotation.Nonnull;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -112,6 +114,20 @@ public class MatrixBuilder {
         return max;
     }
 
+    /**
+     * Check if method is annotated with @Deprecated
+     * @param method
+     * @return true if deprecated
+     */
+    private boolean isDeprecated(@Nonnull Method method) {
+        for( Annotation anno : method.getDeclaredAnnotations() ) {
+            if( anno.annotationType().equals(Deprecated.class) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void populateSupportedServices( Map<String, Boolean> providerFeatures, String rootService, Object services ) {
         providerFeatures.put(rootService, services != null );
         featureDict.put(rootService, null);
@@ -121,7 +137,8 @@ public class MatrixBuilder {
         Method[] methods = services.getClass().getMethods();
         for( Method method : methods ) {
             String name = method.getName();
-            if( name.startsWith("has") && name.endsWith("Support") ) {
+            List<Annotation> list = Arrays.asList(method.getDeclaredAnnotations());
+            if( name.startsWith("has") && name.endsWith("Support") && !isDeprecated(method) ) {
                 try {
                     Boolean support = ( Boolean ) method.invoke(services);
                     providerFeatures.put(rootService + "." + name.substring(3, 4).toLowerCase() + name.substring(4, name.indexOf("Support")), support);
