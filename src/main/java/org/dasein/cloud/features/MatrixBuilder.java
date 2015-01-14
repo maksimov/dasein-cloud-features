@@ -53,7 +53,7 @@ public class MatrixBuilder {
                 continue;
             }
             Map<String, Boolean> providerFeatures = new TreeMap<String, Boolean>();
-            featureMap.put(providerInstance.getProviderName(), providerFeatures);
+            featureMap.put(providerInstance.getCloudName(), providerFeatures);
             populateSupportedServices(providerFeatures, "compute", providerInstance.getComputeServices());
             populateSupportedServices(providerFeatures, "admin", providerInstance.getAdminServices());
             populateSupportedServices(providerFeatures, "ci", providerInstance.getCIServices());
@@ -75,7 +75,6 @@ public class MatrixBuilder {
         headers.add(" ");
         headers.addAll(featureMap.keySet());
         String heading = String.format(rowFormat, headers.toArray(new String[0]));
-        int rowLen = heading.length();
         System.out.print(heading);
 
         // build divider
