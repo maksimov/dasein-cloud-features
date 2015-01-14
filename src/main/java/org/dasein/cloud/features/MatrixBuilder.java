@@ -59,7 +59,8 @@ public class MatrixBuilder {
             populateSupportedServices(providerFeatures, "network", providerInstance.getNetworkServices());
             populateSupportedServices(providerFeatures, "storage", providerInstance.getStorageServices());
         }
-        System.out.println();
+
+        // TODO: refactor all this printing non-sense out of here
         int maxFeatureLen = longestValue(featureDict.keySet());
         int maxProviderLen = longestValue(featureMap.keySet());
         String rowFormat = "|%-"+maxFeatureLen+"s|";
@@ -75,6 +76,11 @@ public class MatrixBuilder {
         int rowLen = heading.length();
         System.out.print(heading);
 
+        // build divider
+        String[] blanks = new String[featureMap.keySet().size()+1];
+        Arrays.fill(blanks, "");
+        String divider = String.format(rowFormat, blanks).replace(' ', '-');
+
         // print values
         List<String> row = new ArrayList<String>();
         for(String key : featureDict.keySet() ) {
@@ -84,7 +90,7 @@ public class MatrixBuilder {
                 keyLabel = "   " + keyLabel.substring(keyLabel.indexOf(".")+1);
             } else {
                 // divide the core services with a line
-                System.out.println(new String(new char[rowLen-1]).replace('\0', '-'));
+                System.out.print(divider);
             }
             row.add(keyLabel);
             for(String providerKey : featureMap.keySet()) {
