@@ -64,10 +64,9 @@ public class MatrixBuilder {
 
         // TODO: refactor all this printing non-sense out of here
         int maxFeatureLen = longestValue(featureDict.keySet());
-        int maxProviderLen = longestValue(featureMap.keySet());
         String rowFormat = "|%-"+maxFeatureLen+"s|";
         for(String key : featureMap.keySet()) {
-            rowFormat += "%-"+maxProviderLen+"s|";
+            rowFormat += "%-"+key.length()+"s|";
         }
         rowFormat += "\n";
         // print header

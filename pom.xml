@@ -59,6 +59,11 @@
         </dependency>
         <dependency>
             <groupId>org.dasein</groupId>
+            <artifactId>dasein-cloud-vcloud</artifactId>
+            <version>${dasein.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dasein</groupId>
             <artifactId>dasein-cloud-digitalocean</artifactId>
             <version>${dasein.version}</version>
         </dependency>
